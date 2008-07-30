@@ -1,8 +1,8 @@
 class Project < ActiveRecord::Base
-  has_many :tasks, :dependent => :destroy
+  has_many :tasks, :dependent => :destroy, :validate => false
   
   validates_presence_of :name
-  validates_associated :tasks, :on => :update # create automatically handles validation
+  validates_associated :tasks, :message => "can't be saved"
   
   after_update :save_tasks
 

@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class ProjectsControllerTest < ActionController::TestCase
   def test_index
@@ -35,13 +35,13 @@ class ProjectsControllerTest < ActionController::TestCase
   
   def test_update_invalid
     Project.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Project.first
+    put :update, :id => Project.first, :project => {}
     assert_template 'edit'
   end
   
   def test_update_valid
     Project.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Project.first
+    put :update, :id => Project.first, :project => {}
     assert_redirected_to project_url(assigns(:project))
   end
   
